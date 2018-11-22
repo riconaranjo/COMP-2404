@@ -9,6 +9,7 @@
 - allows users to run programs
 - command line interpreter
 - main shells
+  - ksh (korn shell)
   - sh (bourn shell)
   - bash (bourne-again shell)
   - csh (c-shell)
@@ -123,7 +124,7 @@
 
 #### access specifiers
 - public
-  - visable to all
+  - visible to all
 - private
   - visible only to same class
 - protected
