@@ -26,7 +26,7 @@ pipelining is used for io redirection
 **Compiling:** generate object code from source files<>
 - gcc -c to compile.
 
-**Linking:** generate execuatable from object code
+**Linking:** generate executable from object code
 - gcc -o to generate executable.
 
 **Makefiles:** easy way to compile and link multiple source files.
@@ -57,7 +57,7 @@ pipelining is used for io redirection
 
 ### Variables
 - contains: name / value / data-type / memory address
-- can be primative / user-defined / pointer
+- can be primitive / user-defined / pointer
 
 ### Functions
 - **global / member functions**
@@ -97,17 +97,17 @@ pipelining is used for io redirection
 - private
   - visible only to same class
 - protected
-  - only visable to sub-classes
+  - only visible to sub-classes
 
 ## Code Organization
 **header Files:**
-- class defintion
+- class definition
 - data members
 - member function prototypes
 
 **Source Files:**
 - member function implementations
-- static data member intialization
+- static data member initialization
 
 ## Class Interface
 - how you interact with a class
@@ -118,19 +118,19 @@ pipelining is used for io redirection
 
 # 2.2 | Constructors + Destructors
 
-## Default Arguements
+## Default Arguments
 - default parameter value
 - specified in function prototype
 - must be right-most in parameter list
 
-### Contructors
+### Constructors
 - explicitly called
 - three types
 
 **1. Copy Constructor:**
 - takes a reference of the same class
 - called when you initialize a variable to another object
-  - but not already intialized variable
+  - but not already initialized variable
 - implicitly called when you pass by reference
 
 **2. Conversion Constructor:**
@@ -180,13 +180,13 @@ pipelining is used for io redirection
 
 **Single Responsibility:** objects should have only one purpose.
 
-**Data Abstraction:** seperating class defintion from implementation.
-  - seperate the **what** from the **how**
+**Data Abstraction:** separating class definition from implementation.
+  - separate the **what** from the **how**
 
 **Encapsulation:** group data that belongs together.
 - protect data from bad code
 - reuse code when possible
-- give data memebers only private or protected access
+- give data members only private or protected access
 
 **Principle of Least Privilege:**
 - protect your data
@@ -234,7 +234,7 @@ pipelining is used for io redirection
 ## Constants
 - objects / data members / member functions
   - object / data member: constant keyword before data type
-  - member function : constant keyword after protoype
+  - member function : constant keyword after prototype
 - constant functions
   - cannot modify data members
   - the only type of functions allowed on a constant object
@@ -251,7 +251,7 @@ pipelining is used for io redirection
 - exists even without class instances
 - global to class
 - only one instance allows
-- intialized in constructor
+- initialized in constructor
 - static member functions can only access static data members
 
 ## Linked Lists
@@ -285,19 +285,104 @@ pipelining is used for io redirection
   - this is called **dynamic binding**
 
 ## Function Bindings
-
 Linking a function call to a specific function
 
 - decide between derived and base class member functions
 
 ### Static Binding
-
 - selection made at compile time
-- _always used_ when called using **object varibable** name
+- _always used_ when called using **object variable** name
 - _can be used_ when called using **object pointer**
 
-### Dyanamic Binding
-
+### Dynamic Binding
 - selection made at runtime
 - _never used_ with **object variable**
 - _can be used_ with **object pointer**
+
+# 4.5 | Overloading
+
+Overloaded functions have same name
+- but different parameters
+
+# 4.6 | Templates
+
+# 4.7 | Exception Handling
+
+# 5.1 | Standard Template Library
+
+# 5.2 | Files + Streams
+
+## Stream
+A stream is a sequence of bytes.
+- contain a set of error bits
+  - `good`: if high -> no errors
+  - `fail`: if high -> formatting error
+  - `bad`: if high -> unrecoverable error
+- contains `eof` bit -> end of file reached
+
+### Characteristics of Streams
+- overloaded `!` operator
+  - returns true if one of the error bits is high
+- cast to `void*` operator
+  - implicitly called when stream is tested as a condition
+  - converts stream to a pointer
+    - `null` if any error bit high
+
+### Input Streams
+- formatted data: `>>`
+  - stream extraction operator
+- unformatted data: `get().getline()`
+  - member functions
+- EOF (end-of-file)
+  - tested using eof()
+
+## Files
+A file is stream in a persistent state
+- in non-volatile storage
+
+### Characteristics of Files
+- linear array of bytes
+- terminated by EOF
+- represented as objects
+
+## `iostream` Library
+istream: `cin`
+- input stream
+
+ostream: `cout` / `cerr` / `clog`
+- output stream
+
+iftream: `cin`
+- input file stream
+- derived from istream
+
+oftream: `cout` / `cerr` / `clog`
+- output file stream
+- derived from ostream
+
+![iostream](img/iostream.png)
+
+### `ofstream` / `ifstream`
+constructor:
+- can optionally open file
+- second parameter indicates mode
+
+### `ofstream` / `ifstream` Characteristics
+- they maintain a file buffer object
+  - the file buffer destructor closes the file
+- can be tested for errors or EOF
+  - using `!` or `(void*)` operators
+- ofstream:
+  - `<<` / `put` / `flush`
+- ifstream:
+  - `>>` / `get` / `getline`
+
+## Stream Member Functions
+- good() -> returns true if none of the below are true
+- fail() -> returns true if `fail` bit high
+- bad() -> returns true if `bad` bit high
+- eof() -> returns true if `eof` bit is high
+- clear() -> clears error and `eof` bits
+
+
+# 5.3 | C++11
