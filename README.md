@@ -48,7 +48,7 @@ pipelining is used for io redirection
 - **operands**
   - variables on which operator acts on
 - **arity**
-  - number of operands
+  - number of operands / arguments
 - **precedence**
   - order in which operators execute
 - **associativity**
@@ -111,7 +111,7 @@ pipelining is used for io redirection
 
 ## Class Interface
 - how you interact with a class
-- shows the set of public members
+- shows the set of **public members**
   - what users need to know:
     - class name
     - public members
@@ -132,6 +132,13 @@ pipelining is used for io redirection
 - called when you initialize a variable to another object
   - but not already initialized variable
 - implicitly called when you pass by reference
+
+```c++
+Date d1, s2;
+Date d3 = d1; // implicit call to copy constructor
+d3 = d2;      // will call assignment operator
+Date d4(d1);  // explicit call to copy constructor
+```
 
 **2. Conversion Constructor:**
 - takes any reference of other than same class
@@ -269,6 +276,9 @@ pipelining is used for io redirection
 ## base class initializer syntax
 - call base constructor as with class initializer syntax
 
+## Types of Inheritance
+_Virtual inheritance is a C++ technique that ensures only one copy of a base class's member variables are inherited by grandchild derived classes._
+
 # 4.3 | Design Patterns
 
 ## order of execution
@@ -301,8 +311,80 @@ Linking a function call to a specific function
 
 # 4.5 | Overloading
 
+Giving multiple meanings or definitions
+
+## Function Overloading
 Overloaded functions have same name
 - but different parameters
+
+Convention is that overloading is used for _functionally_ related tasks.
+
+## Operator Overloading
+
+Overloading operators allows for:
+- language consistency
+- code readability
+- because it's cool
+
+Implicitly overloaded operators (provided by compiler)
+- assignment `=`
+- address-of `&`
+- sequencing `,`
+
+```c++
+/// header file ///
+class Time {
+    bool operator<(Time&);
+};
+
+/// source file ///
+bool Time::operator<(Time& t) {
+    return convertToSecs() < t.convertToSecs();
+}
+```
+
+## Dynamic Allocation
+If you have an object with dynamically allocated members, you should provide:
+- copy constructor
+- destructor
+- overloaded assignment operator
+
+## Approach
+- Operators can be overloaded globally or as a member function.
+  - but not both.
+- operators for primitives cannot be overloaded
+- no new operators can be created
+- arity cannot be changed
+  - (number of operands / arguments)
+- precedence or associativity cannot be changed
+- `.` / `::` / `?`/ etc operators cannot be overloaded
+  - certain operators are non-overloadable
+
+## Cascading
+Chaining together member function calls in a single statement.
+- member functions return pointer to current object
+  - return `this`
+
+```c++
+date.getDate().toStr();
+```
+
+## Operators as Functions
+Some operators **must** be overloaded as **member functions**.
+- `()` cast
+- `[]` subscript
+- `->` arrow
+
+Some operators **must** be overloaded as **global functions**.
+- `<<` stream insertion
+- `>>` stream extraction
+- etc (to enable commutativity)
+
+## Stream Operators
+Stream insertion operator `<<` takes two operands
+- left-hand side: `cout`
+  - `cout` is an `ostream` objects
+  - used as a reference
 
 # 4.6 | Templates
 
@@ -383,6 +465,5 @@ constructor:
 - bad() -> returns true if `bad` bit high
 - eof() -> returns true if `eof` bit is high
 - clear() -> clears error and `eof` bits
-
 
 # 5.3 | C++11
