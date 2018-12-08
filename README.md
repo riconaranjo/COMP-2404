@@ -566,6 +566,49 @@ Array<T>& Array<T>::operator=(Array<T>& arr) {
 ```
 
 # 4.7 | Exception Handling
+Faults are bound to happen when programming.
+- thus error handling is critical
+- find the errors before the user does...
+
+Fault tolerance is the ability of a program to keep running.
+- even in the presence of errors
+  - error checking
+    - Ensure correct inputs, etc.
+  - exception handling
+    - How to recover from failures
+
+## Error Handling
+In order to improve readability:
+- seperate **error reporting** from **error handling**
+  - finding and fixing errors occur in _different places_
+
+## C++ `exception` Class
+Base class for **user-defined exception classes**
+- string parameter in constructor for error message
+- member function `what()` returns error message string
+
+```c++
+try {
+    if (den == 0)
+        throw "Divided by zero !!!"; // throw error with message
+    result = num / den;
+}
+catch(const char* error) {
+    cout << error << endl;
+}
+```
+
+If an exception is uncaught, the program will terminate.
+
+## Stack Unwinding
+Since uncaught exceptions terminate their scope
+- local variables are lost
+- memory is not deallocated
+- program may be in an inconsistent state
+
+### Best Approach
+Make everything an object with destructors that care of clean up
+- destructors automatically called
 
 # 5.1 | Standard Template Library
 
