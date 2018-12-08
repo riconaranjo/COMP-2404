@@ -686,10 +686,91 @@ You must provide operators for copying and comparisons:
 Containers with ordered elements.
 - e.g. `vector` / `list` / `deque`
 
-They contain useful member functions:
-- `.front()` / `.back()` / `.push_back()` / `.pop_back()`
+**Useful member functions:**
+- `.front()`
+- `.back()`
+- `.push_back()`
+- `.pop_back()`
 
-## Vectors
+### Vectors [Sequence Container]
+**Characteristics:**
+- elements are stored contiguously
+- grows as needed
+- allows random access
+  - using `[]` or `.at()`
+  - random access iterators
+
+**Insertion:** very efficient at end [like array]
+- anywhere else requires copying
+
+### Deques [Sequence Container]
+Double-ended queues
+
+**Characteristics:**
+- elements are not necessarily stored contiguously
+- grows as needed
+- allows random access
+  - random access iterators
+
+**Insertion:** very efficient at front or end [like dlist]
+- anywhere else less efficient than a list
+  - but much more efficient than vector
+
+### Lists [Sequence Container]
+**Characteristics:**
+- implemented as a doubly-linked list
+- elements not necessarily stored contiguously
+- grows as needed
+- does not support random access
+  - but does support bidirectional iterators
+
+## Associative Containers
+Containers that store elements using keys
+- these keys are stored in a user-specified order
+  - default: ascending
+  - predicate can be used to specify order
+
+**Types:**
+- `set`      : stores keys
+- `multiset` : stores keys (allows duplicates)
+- `map`      : stores keys and values
+- `multiset` : stores keys and values (allows duplicates)
+
+**Useful member functions:**
+- `.insert()`
+- `.find()`
+- `.lower_bound()`
+- `.upper_bound()`
+
+## Container Adapters
+High-level containers providing restricted access to elements.
+- e.g. `stack` / `queue` / `priority_queue`
+
+**Characteristics:**
+- use underlying containers to store elements
+  - `stack` : any sequence container
+  - `queue` : `deque` or `list`
+  - `priority_queue` : `vector` or `deque`
+- users can specify the underlying container
+- **do not support iterators**
+
+## Algorithms
+STL algorithms are global function templates that operate on containers.
+- they use iterators
+- and may work on non-STL containers such as primitive arrays
+- indirect access to containers allows for more generic algorithms
+  that work on multiple types of containers
+
+**Characteristics:**
+- often operate on containers using paris of iterators
+- often return an iterator
+- each algorithm requires specific types of iterators
+
+**Useful algorithms:**
+- `.sort()`
+- `.copy()`
+- `.remove()`
+- `.fill()`
 
 # 5.2 | Files + Streams
 
