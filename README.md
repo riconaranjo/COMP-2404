@@ -541,10 +541,10 @@ If you have a templated class
 /// header file ///
 template <class T>
 class Array {
-  template <typename V>
+   template <typename V>
 
-  public:
-    Array<T>& operator=(Array&);
+    public:
+      Array<T>& operator=(Array&);
 };
 
 /// implementation (header file) ///
