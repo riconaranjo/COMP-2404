@@ -585,7 +585,7 @@ In order to improve readability:
 ## C++ `exception` Class
 Base class for **user-defined exception classes**
 - string parameter in constructor for error message
-- member function `what()` returns error message string
+- member function `.what()` returns error message string
 
 ```c++
 try {
@@ -610,7 +610,86 @@ Since uncaught exceptions terminate their scope
 Make everything an object with destructors that care of clean up
 - destructors automatically called
 
-# 5.1 | Standard Template Library
+# 5.1 | Standard Template Library (STL)
+The STL is a library of classes and algorithms
+- contains useful container classes and member functions
+  - but can be non-intuitive to use
+  - and can severely degrade performance
+
+**Main Components:**
+- containers
+- iterators
+- algorithms
+
+## Iterators
+Container contents are accessed through iterators
+- conceptually similar to pointers
+- used to iterate over (traverse through) an STL container
+- passed as a parameter to many STL algorithms
+
+### Types of Iterators
+- **Forward:** traverse from first element to the last
+  - `iterator` / `const_iterator`
+- **Reverse:** traverse from last element to the first
+  - `reverse_iterator` / `const_reverse_iterator`
+
+### Iterator Operations
+These operators are supported by all types of iterators in the STL:
+- `*`  : dereferencing
+- `++` : advancing
+- `=`  : assignment
+- `==` / `!=` : logical equality
+
+### Iterator Member Functions
+- `.begin()`  : points to the first element
+- `.end()`    : points to next position after the last element
+- `.rbegin()` : points to the last element
+- `.rend()`   : points to next position before the first element
+
+### Categories of Iterators
+- **Input / Ouput:** for IO streams.
+  - `*` / `++` / `=` / `==` / `!=`
+- **Forward:** for containers (in the forward direction).
+  - `*` / `++` / `=` / `==` / `!=`
+  - `.begin()` / `.end()`
+- **Bidirectional:** for containers (...).
+  - `*` / `++` / `=` / `==` / `!=`
+  - `--`
+  - `.begin()` / `.end()`
+  - `.rbegin()` / `.rend()`
+- **Random Access:** allows direct access to any element in a container.
+  - `*` / `++` / `=` / `==` / `!=`
+  - `--`
+  - `[]` / `<` / `>` / `<=` / `>=` / `+` / `+=` / `-` / `-=`
+  - `.begin()` / `.end()`
+  - `.rbegin()` / `.rend()`
+
+## Containers
+All STL containers provide:
+- default constructor / copy constructor / destructor / assignment operator
+- insertion / deletion member functions
+  - e.g. `.insert()` / `.delete()` / `.clear()`
+- size related member functions
+  - e.g. `.size()` / `.empty()` / `.max_size()`
+- relational operators
+
+**Sequence and Associative Containers** provide:
+- member functions for iteration
+  - e.g. `.begin()` / `.end()` / `.rbegin()` / `.rend()`
+
+## Implementing Classes with STL Containers
+You must provide operators for copying and comparisons:
+- **copying:** copy constructor / assignment operator
+- **comparision:** equality / less-than operators
+
+## Sequence Containers
+Containers with ordered elements.
+- e.g. `vector` / `list` / `deque`
+
+They contain useful member functions:
+- `.front()` / `.back()` / `.push_back()` / `.pop_back()`
+
+## Vectors
 
 # 5.2 | Files + Streams
 
@@ -654,11 +733,11 @@ istream: `cin`
 ostream: `cout` / `cerr` / `clog`
 - output stream
 
-iftream: `cin`
+ifstream: `cin`
 - input file stream
 - derived from istream
 
-oftream: `cout` / `cerr` / `clog`
+ofstream: `cout` / `cerr` / `clog`
 - output file stream
 - derived from ostream
 
