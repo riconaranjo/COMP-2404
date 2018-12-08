@@ -352,6 +352,7 @@ If you have an object with dynamically allocated members, you should provide:
 ## Approach
 - Operators can be overloaded globally or as a member function.
   - but not both.
+  - cannot be static member function
 - operators for primitives cannot be overloaded
 - no new operators can be created
 - arity cannot be changed
@@ -366,7 +367,16 @@ Chaining together member function calls in a single statement.
   - return `this`
 
 ```c++
-date.getDate().toStr();
+date.setDate(day, month, year).toStr();
+
+/// cascading member function
+Date& Date::setDate(int day, int month, int year) {
+    setDay(day);
+    setMonth(month);
+    setYear(year);
+
+    return *this;
+}
 ```
 
 ## Operators as Functions
@@ -381,10 +391,119 @@ Some operators **must** be overloaded as **global functions**.
 - etc (to enable commutativity)
 
 ## Stream Operators
-Stream insertion operator `<<` takes two operands
+Stream insertion operator `<<` takes two operands.
 - left-hand side: `cout`
   - `cout` is an `ostream` objects
   - used as a reference
+- right-hand side: object (to be output)
+- must be a friend function to output class
+
+```c++
+/// header file ///
+
+class Time {
+  friend ostream& operator<<(ostream&, Time&);
+  friend istream& operator>>(istream&, Time&);
+  
+  // code...
+};
+
+/// source file ///
+
+/// global overloading of `>>`
+istream& operator>>(istream& in, Time& t) {
+    int h, m, s;
+    in >> setw(2) >> h;
+    in.ignore();
+    in >> setw(2) >> m;
+    in.ignore();
+    in >> setw(2) >> s;
+    t.setTime(h,m,s);
+
+    return in; // return the input stream object
+}
+
+/// global overloading of `<<`
+ostream& operator<<(ostream& out, Time& t) {
+    out << setfill('0') << setw(2) << t.hours   << ":"
+        << setfill('0') << setw(2) << t.minutes << ":"
+        << setfill('0') << setw(2) << t.seconds;
+
+    return out; // return the output stream object
+}
+
+/// usage ///
+Time t;
+cin >> t;
+// accepts three lines as input (h,m,s)
+  // 12
+  // 30
+  // 45
+cout << t << endl;
+// prints `12:30:45`
+```
+
+## Unary Operators
+- **Global:** one parameter
+  - object (or reference)
+- **Member:** no parameters
+  - cannot be static
+
+## Binary Operators
+- **Global:** two parameters
+  - first is target object (or reference)
+- **Member:** one parameters
+  - cannot be static
+
+## Prefix / Postfix ++ / --
+To differentiate from prefix and postfix version of an operator, a **dummy variable** is used.
+- postfix ++ will use **copy constructor** to generate a temporary copy
+  - returns local copy (**not** a reference)
+  - so it will be slower than prefix
+
+### Example: Member Functions
+- **Prefix:** no parameters:
+- **Postfix:** one parameter:
+  - dummy variable
+
+```c++
+/// header file ///
+class Time {
+  public:
+    Time& operator++();     // prefix  ++t
+    Time  operator++(int);  // postfix t++
+};
+
+/// source file ///
+
+/// prefix ++
+Time& Time::operator++() {
+    int tmp = this->convertToSecs() + 1;
+    this->setTime(tmp);
+
+    return *this;
+}
+
+/// postfix ++
+Time Time::operator++(int) {
+    Time tmp = *this;
+    ++(*this);
+
+    return tmp;
+}
+```
+
+### Example: Global Functions
+- **Prefix:** one parameter:
+  - reference to target object
+- **Postfix:** two parameters:
+  - reference to target object
+  - dummy variable
+
+```c++
+Time& operator++(Time&);        // prefix  ++b
+Time  operator++(Time&, int);   // postfix b++
+```
 
 # 4.6 | Templates
 
