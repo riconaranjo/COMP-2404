@@ -2,7 +2,7 @@
 
 📘 My notes for my Intro into Software Eng. (CS) course – written in markdown
 
-# 1 | Basics of C++ Development
+# 1.1 | Basics of C++ Development
 
 ## Shells
 A shell is program that allows direct access to OS, and allows users to run programs.
@@ -349,6 +349,8 @@ If you have an object with dynamically allocated members, you should provide:
 - destructor
 - overloaded assignment operator
 
+`// dynamic allocation is when you allocate memory from the heap (using keyword: new)`
+
 ## Approach
 - Operators can be overloaded globally or as a member function.
   - but not both.
@@ -506,6 +508,62 @@ Time  operator++(Time&, int);   // postfix b++
 ```
 
 # 4.6 | Templates
+
+## Overview
+Templates are used for data-abstraction.
+- separating _abstract_ properties from _concrete_ implementations
+Improves code reusability.
+- use generic datatypes
+
+## Function Templates
+_Note: you can overload templated function with non-templated function._
+
+When code is compiled, the compiler will generate the **specialization** of the template function.
+- each **specialization** will have datatype hardcoded
+- but only for datatypes used.
+
+```c++
+template <typename T>
+T max(T v1, T v2, T v3) {
+    T maxValue = v1;
+    if (v2 > maxValue) maxValue = v2;
+    if (v3 > maxValue) maxValue = v3;
+
+    return maxValue;
+}
+```
+
+## Class Templates
+If you have a templated class
+- source file implementation is moved to header file
+
+```c++
+/// header file ///
+template <class T>
+class Array {
+  template <typename V>
+
+  public:
+    Array<T>& operator=(Array&);
+};
+
+/// implementation (header file) ///
+template <class T>
+Array<T>& Array<T>::operator=(Array<T>& arr) {
+    if (&arr == this) return *this;
+  
+    if (capacity != arr.capacity) {
+        delete [] elements;
+        capacity = arr.capacity;
+        elements = new T[capacity];
+    }
+
+    for (int i = 0; i < capacity; ++i)
+        elements[i] = arr[i];
+
+    return *this;
+}
+```
 
 # 4.7 | Exception Handling
 
