@@ -288,27 +288,116 @@ Date d4(d1);  // explicit call to copy constructor
 
 # 4.2 | Inheritance
 
-## base / derived
+## Base / Derived
 - all base class members are inherited
-  - but access modifiers change
-  - private become invisible
-  - protected / public remain the same
+  - but some access modifiers change depending on **mode of inheritance**:
+    - `public` / `protected` / `private`
 
-## base class initializer syntax
+### Public Inheritance
+- creates an **is-a** relationship between base and derived classes
+  - `private`   -> `invisible`
+  - `protected` -> `protected`
+  - `public`    -> `public`
+
+### Protected Inheritance
+- does **not** create an **is-a** relationship between base and derived classes
+- used to restrict access to inherited members
+  - `private`   -> `invisible`
+  - `protected` -> `protected`
+  - `public`    -> `protected`
+
+### Protected Inheritance
+- does **not** create an **is-a** relationship between base and derived classes
+- used to restrict access to inherited members
+  - `private`   -> `invisible`
+  - `protected` -> `private`
+  - `public`    -> `private`
+
+```c++
+/// base class header file ///
+class Base {
+    // code
+};
+
+/// child class header file ///
+class Child : public Base {
+    // code
+};
+
+/// child class header file ///
+class OtherChild : protected Base {
+    // code
+};
+
+/// child class header file ///
+class OtherChild : private Base {
+    // code
+};
+```
+
+## Base Class Initializer syntax
 - call base constructor as with class initializer syntax
 
+```c++
+/// base class header file ///
+Base::Base(int n) {
+   set_n(n);
+}
+
+/// child class source file ///
+Child::Child(int n, int x) : Base(n) {
+  set_x(x);
+}
+```
+
 ## Types of Inheritance
+
+### Multiple Inheritance
+In c++ a derived class can inherit from more than one base class.
+- ambiguity is solved with binary scope operator `::`
+
+```c++
+/// child class header file ///
+class Child : public Parent_1, public Parent_2 {
+    // code
+};
+```
+
+### Virtual Inheritance
 _Virtual inheritance is a C++ technique that ensures only one copy of a base class's member variables are inherited by grandchild derived classes._
+
+If there is diamond inheritance, virtual inheritance will ensure member variables are not duplicated.
+
+```c++
+/// base class header file ///
+class Grandparent {
+    public:
+        int x;
+}
+
+/// class header file ///
+class Parent_1 : public virtual Grandparent {
+    // inherits data member 'x'
+};
+
+/// class header file ///
+class Parent_2 : public virtual Grandparent {
+    // inherits data member 'x'
+};
+
+/// child class header file ///
+class Child : public virtual Parent_1, virtual public Parent_2 {
+    // inherits only one data member 'x'
+};
+```
 
 # 4.3 | Design Patterns
 
 ## order of execution
-  - ctor / dtor
-  - ctor: parent to child
-  - dtor: child to parent
+- constructor: parent to child
+- destructor:  child to parent
 
 # 4.4 | Polymorphism
-
 - enables generalized use of a class hierarchy
   - interface at base class
   - derived classes override interface functions with specialized behaviour
@@ -316,8 +405,7 @@ _Virtual inheritance is a C++ technique that ensures only one copy of a base cla
   - this is called **dynamic binding**
 
 ## Function Bindings
-Linking a function call to a specific function
-
+Linking a function call to a specific function.
 - decide between derived and base class member functions
 
 ### Static Binding
@@ -326,9 +414,73 @@ Linking a function call to a specific function
 - _can be used_ when called using **object pointer**
 
 ### Dynamic Binding
-- selection made at runtime
-- _never used_ with **object variable**
-- _can be used_ with **object pointer**
+- selection made at runtime based on type of object
+  - _never used_ with **object variable**
+  - _can be used_ with **object pointer**
+- implemented using virtual functions
+
+## Virtual Functions
+A virtual function is selected for execution at runtime
+- based oon the type of **object** not on type of **handle**
+  - e.g. **base class** function vs. **child class** function
+- Virtual destructor needs to be implemented
+  - to deallocate memory using base class pointer
+
+## Abstract Classes
+An abstract class cannot be instantiated.
+- abstract classes contain at least one pure virtual function
+- in c++ **abstract** is specified as **pure virtual**
+  - **pure virtual** functions contain **no implementation**
+    - must be overridden by child classes
+
+```c++
+/// base class header file ///
+class Base {
+    public:
+        virtual void func_1() = 0; // pure virtual function
+        virtual void func_2();     // virtual function
+};
+
+/// child class header file ///
+class Child : public Base {
+    public:
+        void func_1(); // pure virtual function
+        void func_2(); // virtual function (optional)
+};
+```
+
+## Dynamic Casting
+- if you cannot use polymorphism techniques:
+  - you can use **Runtime Type Information(RTTI)**
+    - `typeid` operator returns reference to `type_info` object
+    - which can be queried for class name
+    - crude substitute for good design techniques
+  - or you can use **dynamic casting**
+    - `dynamic_cast` operator used to downcast base class pointer
+    - used when we need to access derived class members
+      - returns 0 if fails
+    - safe checking of whether object is of a certain type
+
+## Encapsulating Behaviour
+A behaviour class encapsulates behaviours or algorithms
+- allowing client to dynamically change which code executes
+- treating behaviour as an object that can be switched at runtime
+
+If you seperate behaviour from data, runtime changes are much easier.
+- e.g. game character changing from human to zombie, etc.
+- behaviour can be reused
+
+### Traditional Approach
+![traditional](img/traditional.png)
+
+### Behaviour Classes
+![behaviour](img/behaviour.png)
+
+### Strategy Design Pattern
+A behavioural design pattern that provides a family of algorithms
+- defines an abstract interface for a family of algorithms
+- each algorithm is encapsulated
+- concrete implementations can be interchanged at runtime
 
 # 4.5 | Overloading
 
