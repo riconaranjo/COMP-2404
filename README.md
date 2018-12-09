@@ -417,7 +417,7 @@ Structural design pattern that provides a simplified interface for complex class
 - e.g. client class interacts with Façade
   - which then delegates actual operation(s) to actual class(es)
 
-![façade](img/façade.png)
+![facade](img/facade.png)
 
 ## Observer
 
