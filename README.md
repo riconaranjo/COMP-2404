@@ -703,6 +703,35 @@ Containers with ordered elements.
 **Insertion:** very efficient at end [like array]
 - anywhere else requires copying
 
+```c++
+// create vector object
+vector<Student> comp2404;
+
+// add elements to vector object
+comp2404.push_back(student_1)
+comp2404.push_back(student_2)
+comp2404.push_back(student_3)
+
+/// print vector object elements ///
+
+// using standard for loop
+for (int i = 0; i < comp2404.size(); i++) {
+  cout << comp2404[i];
+}
+
+// using iterator (forwards)
+vector<Object>::iterator itr_1;
+for (itr_1 = comp2404.begin(); itr_1 != comp2404.end(); ++itr_1) {
+  cout << *itr_1;
+}
+
+// using iterator (reverse)
+vector<Object>::reverse_iterator itr_2;
+for (itr_2 = comp2404.rbegin(); itr_2 != comp2404.rend(); ++itr_2) {
+  cout << *itr_2;
+}
+```
+
 ### Deques [Sequence Container]
 Double-ended queues
 
@@ -716,6 +745,25 @@ Double-ended queues
 - anywhere else less efficient than a list
   - but much more efficient than vector
 
+```c++
+// create deque object
+deque<Student> comp2404;
+
+// add elements to deque
+// you could use other member functions
+    // .push_back(), etc.
+comp2404.push_front(student_1);
+comp2404.push_front(student_2);
+comp2404.push_front(student_3);
+
+// sort elements
+comp2404.sort();
+
+// print all elements using ostream iterator (see Section 5.2)
+copy(comp2404.begin(), comp2404.end(), outItr);
+// note: this could also be done with other collection classes
+```
+
 ### Lists [Sequence Container]
 **Characteristics:**
 - implemented as a doubly-linked list
@@ -723,6 +771,18 @@ Double-ended queues
 - grows as needed
 - does not support random access
   - but does support bidirectional iterators
+
+```c++
+// create list object
+list<Student> comp2404;
+
+// add elements to list
+// you could use other member functions
+    // .push_back(), etc.
+comp2404.push_back(student_1);
+comp2404.push_back(student_2);
+comp2404.push_back(student_3);
+```
 
 ## Associative Containers
 Containers that store elements using keys
@@ -754,6 +814,19 @@ High-level containers providing restricted access to elements.
 - users can specify the underlying container
 - **do not support iterators**
 
+```c++
+// create stack object
+stack<Student> comp2404;
+
+comp2404.push(student_1);
+comp2404.push(student_2);
+comp2404.push(student_3);
+
+cout << "old top of stack: " << comp2404.top(); // student_3
+comp2404.pop();
+cout << "new top of stack: " << comp2404.top(); // student_2
+```
+
 ## Algorithms
 STL algorithms are global function templates that operate on containers.
 - they use iterators
@@ -781,6 +854,15 @@ A stream is a sequence of bytes.
   - `fail`: if high -> formatting error
   - `bad`: if high -> unrecoverable error
 - contains `eof` bit -> end of file reached
+
+## Stream Member Functions
+```c++
+cin.good()  // -> returns true if none of the below are true
+cin.fail()  // -> returns true if `fail` bit high
+cin.bad()   // -> returns true if `bad` bit high
+cin.eof()   // -> returns true if `eof` bit is high
+cin.clear() // -> clears error and `eof` bits
+```
 
 ### Characteristics of Streams
 - overloaded `!` operator
@@ -824,6 +906,56 @@ ofstream: `cout` / `cerr` / `clog`
 
 ![iostream](img/iostream.png)
 
+### Example: `char` stream
+
+```c++
+cout << "Enter <str>:" << endl;
+c = cin.get();
+
+// while not a newline char...
+// add to string `str`
+while (c != '\n') {
+    str += c;
+    c = cin.get();
+}
+
+// outputs the stored input:
+cout << "you said: " << str << endl;
+```
+
+Example: Get Line
+
+```c++
+cin.getline(str, MAX_BUF);
+// MAX_BUF is user defined
+cout << "you said: " << str << endl;
+```
+
+### Example: `ostream` + `istream`
+Assignment operators used for input / output.
+
+```c++
+ostream_iterator<string> outItr(cout);
+string w1, w2, w3;
+
+// this line outputs to console
+*outItr = "Enter three words: ";
+
+// this line seeks for console input
+istream_iterator<string> inItr(cin);
+w1 = *inItr;
+++inItr; // console input
+w2 = *inItr;
+++inItr; // console input
+w3 = *inItr;
+
+// if you don't increment ostream iterator,
+// previous input will be overwritten
+
+*outItr = "Your words are: ";
+*outItr = w1 + " " + w2 + " " + w3 + "\n";
+```
+
 ### `ofstream` / `ifstream`
 constructor:
 - can optionally open file
@@ -839,11 +971,8 @@ constructor:
 - ifstream:
   - `>>` / `get` / `getline`
 
-## Stream Member Functions
-- good() -> returns true if none of the below are true
-- fail() -> returns true if `fail` bit high
-- bad() -> returns true if `bad` bit high
-- eof() -> returns true if `eof` bit is high
-- clear() -> clears error and `eof` bits
-
 # 5.3 | C++11
+
+## New Language Features
+
+## New Library Features
