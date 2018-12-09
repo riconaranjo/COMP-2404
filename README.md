@@ -1111,6 +1111,7 @@ A stream is a sequence of bytes.
 - contains `eof` bit -> end of file reached
 
 ## Stream Member Functions
+
 ```c++
 cin.good()  // -> returns true if none of the below are true
 cin.fail()  // -> returns true if `fail` bit high
