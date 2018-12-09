@@ -2,9 +2,26 @@
 
 📘 My notes for my Intro into Software Eng. (CS) course – written in markdown
 
-## Sections:z
-[5.3 | C++11](#c++11)
-[5.2 | Files + Streams](#files-streams)
+## Table of Contents
+
+[1.1 | Basics of C++ Development](#1.1-|-Basics-of-C++-Development)<br>
+[2.1 | Classes](#2.1-|-Classes)<br>
+[2.2 | Constructors + Destructors](#2.2-|-Constructors-+-Destructors)<br>
+[2.3 | Memory Management](#2.3-|-Memory-Management)<br>
+[3.1 | Basics of Object-Oriented Design](#3.1-|-Basics-of-Object-Oriented-Design)<br>
+[3.2 | Information Hiding](#3.2-|-Information-Hiding)<br>
+[3.3 | Object Design Categories](#3.3-|-Object-Design-Categories)<br>
+[3.4 | Documenting Design](#3.4-|-Documenting-Design)<br>
+[4.1 | Essential Techniques](#4.1-|-Essential-Techniques)<br>
+[4.2 | Inheritance](#4.2-|-Inheritance)<br>
+[4.3 | Design Patterns](#4.3-|-Design-Patterns)<br>
+[4.4 | Polymorphism](#4.4-|-Polymorphism)<br>
+[4.5 | Overloading](#4.5-|-Overloading)<br>
+[4.6 | Templates](#4.6-|-Templates)<br>
+[4.7 | Exception Handling](#4.7-|-Exception-Handling)<br>
+[5.1 | Standard Template Library (STL)](#5.1-|-Standard-Template-Library-STL)<br>
+[5.2 | Files + Streams](#5.2-|-Files-+-Streams)<br>
+[5.3 | C++11](#5.3-|-C++11)<br>
 
 # 1.1 | Basics of C++ Development
 
@@ -974,6 +991,7 @@ constructor:
   - `<<` / `put` / `flush`
 - ifstream:
   - `>>` / `get` / `getline`
+
 
 # 5.3 | C++11
 
