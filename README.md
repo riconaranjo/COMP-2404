@@ -238,7 +238,7 @@ Date d4(d1);  // explicit call to copy constructor
 
 # 3.4 | Documenting Design
 
-**UML Class Diagrams:**
+## UML Class Diagrams
 - no collection classes
   - implied with multiplicity
 - no getters / setters / ctor / dtor
@@ -252,6 +252,11 @@ Date d4(d1);  // explicit call to copy constructor
   - `+` public
   - `#` protected
   - `-` private
+- abstract class names are _italicized_
+  - pure virtual classes in c++
+
+### Example
+![uml](img/uml.png)
 
 # 4.1 | Essential Techniques
 
@@ -270,21 +275,66 @@ Date d4(d1);  // explicit call to copy constructor
 - must use member initializer syntax
 
 ## Friendship
-- grants access to all private / protected members
-  - cannot be taken
-  - does not apply to derived classes of friend class
-- friend function can access all members of a class
+- grants access to all `private` / `protected` members
+  - cannot be taken _(must be granted)_
+  - does not apply to derived classes of friend class _(not inherited)_
+- a friend class / function can access all members of a class
+
+```c++
+class Student;
+
+class Address {
+    friend Student;               // friend class
+    friend void where(Student&);  // friend function
+};
+```
 
 ## Static Class Members
-- exists even without class instances
-- global to class
-- only one instance allows
-- initialized in constructor
+Static data member and member functions exist to service an entire class.
+- 'global' to class
+- static functions exists even without class instances
+  - must be written to work even if no instances exist
+  - must be specified `static` in class definition
+- only one copy of each static member exists per class
+- static data members initialized at file scope
+  - in source file, by convention
 - static member functions can only access static data members
+
+```c++
+/// header file ///
+class Book {
+    public:
+        static int get_next_id();
+    private:
+        static int next_id;
+};
+
+/// source file ///
+int Book::next_id = 1001;
+
+int Book::getNextId() {
+    return next_id; // only static variables allowed
+}
+```
 
 ## Linked Lists
 - insertion / deletion / clean-up
 - singly / doubly / tail / no-tail
+
+### Adding to a Linked List
+There are four cases when adding a new element to a linked list:
+1. adding to an empty list
+2. inserting at the front
+3. inserting somewhere in the middle
+4. appending to the end
+
+### Removing from a Linked List
+There are four cases to consider when removing elements from a linked list:
+1. list is already empty (incorrect input)
+2. remove from the front
+  - removing last element -> newly empty list
+3. remove from the middle
+4. remove from the end
 
 # 4.2 | Inheritance
 
