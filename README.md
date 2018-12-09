@@ -29,26 +29,26 @@
 A shell is program that allows direct access to OS, and allows users to run programs.
 - command line interpreter
 - main shells
-  - ksh (korn shell)
-  - sh (bourn shell)
-  - bash (bourne-again shell)
-  - csh (c-shell)
+  - `ksh` (korn shell)
+  - `sh` (bourn shell)
+  - `bash` (bourne-again shell)
+  - `csh` (c-shell)
 - differences include
-  - commandline shortcuts
+  - command-line shortcuts
   - environment variables
 
 ## Redirection
-pipelining is used for io redirection
-- \< redirects from
-- \> redirects to
+Pipelining is used for IO redirection.
+- `<` redirects from
+- `>` redirects to
 
 ## Program Building
 
 **Compiling:** generate object code from source files<>
-- gcc -c to compile.
+- `g++ -c` to compile.
 
 **Linking:** generate executable from object code
-- gcc -o to generate executable.
+- `g++ -o` to generate executable.
 
 **Makefiles:** easy way to compile and link multiple source files.
 - text file
@@ -113,15 +113,15 @@ pipelining is used for io redirection
 4. Multiple inheritance.
 
 ## Access Specifiers
-- public
+- `public`
   - visible to all
-- private
+- `private`
   - visible only to same class
-- protected
+- `protected`
   - only visible to sub-classes
 
 ## Code Organization
-**header Files:**
+**Header Files:**
 - class definition
 - data members
 - member function prototypes
@@ -992,9 +992,45 @@ constructor:
 - ifstream:
   - `>>` / `get` / `getline`
 
-
 # 5.3 | C++11
+The C++ standard approved in 2011 bring many important changes and improvement.
+- core of the language was changed
+- C++ standard library was changed
+
+Most of these changes are outside the scope of this course.
 
 ## New Language Features
 
+**Type inference:** declaring `auto` variable allows for compiler to infer data type.
+
+**Range-based `for` loop:** basically a `foreach` loop.
+
+**Null pointer constant:** `nullptr` keyword replaces the use of `NULL` or zero.
+
 ## New Library Features
+
+**Override functions:** used if derived classes override base class functions.
+
+**Final virtual functions:**
+- if base class function should never be overwritten
+  - anywhere down the class hierarchy
+
+**Move semantics:**
+- since c++ often created copies of objects
+  - with copy constructor / copy-assignment operator
+- now objects can be **moved** instead of **copied**
+  - used only if one copy of the object is need
+  - and old copy of object is no longer needed
+- requires `rvalue` references
+  - _`rvalue` is a value that can **only** be used on the right hand side of an expression_
+  - the reference is declared using `&&` symbol
+    - and is used as a parameter to:
+      - _move constructor_
+      - _move-assignment operator_
+
+**Smart pointers:** pointers that manage their own memory.
+- keeps track of how many references to each object
+- when no smart pointers reference an object
+  - object is destroyed / memory deallocated
+- `shared_ptr` instead of primitive pointer
+- `make_shared` allocates memory for the object
