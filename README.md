@@ -2,6 +2,10 @@
 
 📘 My notes for my Intro into Software Eng. (CS) course – written in markdown
 
+## Sections:z
+[5.3 | C++11](#c++11)
+[5.2 | Files + Streams](#files-streams)
+
 # 1.1 | Basics of C++ Development
 
 ## Shells
