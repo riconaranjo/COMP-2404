@@ -391,11 +391,43 @@ class Child : public virtual Parent_1, virtual public Parent_2 {
 };
 ```
 
-# 4.3 | Design Patterns
-
-## order of execution
+## Order of Execution
 - constructor: parent to child
 - destructor:  child to parent
+
+# 4.3 | Design Patterns
+A design pattern is a solution to a commonly occurring problem.
+- an established way of organizing classes
+
+## Types of Design Patterns
+- **Creational:** specify how objects are created
+  - and which objects create other objects
+  - e.g. `Factory`
+- **Structural:** specify how objects are associated
+  - inheritance and composition
+  - e.g. `Façade`
+- **Behavioural:** specify how objects communicate
+  - which objects call which operations on other objects
+  - e.g. `Observer`
+- **Architectural:** specify how objects are grouped
+  - e.g. client-server / peer-to-peer / mvc
+
+## Façade
+Structural design pattern that provides a simplified interface for complex classes
+- e.g. client class interacts with Façade
+  - which then delegates actual operation(s) to actual class(es)
+
+![façade](img/façade.png)
+
+## Observer
+
+![factory](img/factory.png)
+
+## Factory
+
+![observer](img/observer.png)
+
+## Anti-Patterns
 
 # 4.4 | Polymorphism
 - enables generalized use of a class hierarchy
