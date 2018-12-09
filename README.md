@@ -4,24 +4,24 @@
 
 ## Table of Contents
 
-[1.1 | Basics of C++ Development](#11-|-Basics-of-C++-Development)<br>
-[2.1 | Classes](#21-|-Classes)<br>
-[2.2 | Constructors + Destructors](#22-|-Constructors-+-Destructors)<br>
-[2.3 | Memory Management](#23-|-Memory-Management)<br>
-[3.1 | Basics of Object-Oriented Design](#31-|-Basics-of-Object-Oriented-Design)<br>
-[3.2 | Information Hiding](#32-|-Information-Hiding)<br>
-[3.3 | Object Design Categories](#33-|-Object-Design-Categories)<br>
-[3.4 | Documenting Design](#34-|-Documenting-Design)<br>
-[4.1 | Essential Techniques](#41-|-Essential-Techniques)<br>
-[4.2 | Inheritance](#42-|-Inheritance)<br>
-[4.3 | Design Patterns](#43-|-Design-Patterns)<br>
-[4.4 | Polymorphism](#44-|-Polymorphism)<br>
-[4.5 | Overloading](#45-|-Overloading)<br>
-[4.6 | Templates](#46-|-Templates)<br>
-[4.7 | Exception Handling](#47-|-Exception-Handling)<br>
-[5.1 | Standard Template Library (STL)](#51-|-Standard-Template-Library-STL)<br>
-[5.2 | Files + Streams](#52-|-Files-+-Streams)<br>
-[5.3 | C++11](#53-|-C++11)<br>
+[1.1 | Basics of C++ Development](#11--Basics-of-C+-Development)<br>
+[2.1 | Classes](#21--Classes)<br>
+[2.2 | Constructors + Destructors](#22--Constructors--Destructors)<br>
+[2.3 | Memory Management](#23--Memory-Management)<br>
+[3.1 | Basics of Object-Oriented Design](#31--Basics-of-Object-Oriented-Design)<br>
+[3.2 | Information Hiding](#32--Information-Hiding)<br>
+[3.3 | Object Design Categories](#33--Object-Design-Categories)<br>
+[3.4 | Documenting Design](#34--Documenting-Design)<br>
+[4.1 | Essential Techniques](#41--Essential-Techniques)<br>
+[4.2 | Inheritance](#42--Inheritance)<br>
+[4.3 | Design Patterns](#43--Design-Patterns)<br>
+[4.4 | Polymorphism](#44--Polymorphism)<br>
+[4.5 | Overloading](#45--Overloading)<br>
+[4.6 | Templates](#46--Templates)<br>
+[4.7 | Exception Handling](#47--Exception-Handling)<br>
+[5.1 | Standard Template Library (STL)](#51--Standard-Template-Library-STL)<br>
+[5.2 | Files + Streams](#52--Files--Streams)<br>
+[5.3 | C++11](#53--C11)<br>
 
 # 1.1 | Basics of C++ Development
 
