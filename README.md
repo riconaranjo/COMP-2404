@@ -4,7 +4,7 @@
 
 ## Table of Contents
 
-[1.1 | Basics of C++ Development](#11--Basics-of-C+-Development)<br>
+[1.1 | Basics of C++ Development](#11--Basics-of-C-Development)<br>
 [2.1 | Classes](#21--Classes)<br>
 [2.2 | Constructors + Destructors](#22--Constructors--Destructors)<br>
 [2.3 | Memory Management](#23--Memory-Management)<br>
