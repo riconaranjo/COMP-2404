@@ -169,7 +169,6 @@ class Date {
         Date();      // default constructor
         ~Date();     // destructor
 };
-Date(); // prototype
 ```
 
 **1. Copy Constructor:**
