@@ -163,11 +163,11 @@ Book(string="unknown title", string="unknown author");
 ```c++
 template <typename T>
 class Date {
-    public:
-        Date(&Date); // copy constructor
-        Date(&T);    // conversion constructor
-        Date();      // default constructor
-        ~Date();     // destructor
+  public:
+    Date(&Date); // copy constructor
+    Date(&T);    // conversion constructor
+    Date();      // default constructor
+    ~Date();     // destructor
 };
 ```
 
@@ -320,16 +320,19 @@ const Date newYear(1, 1); // date that cannot be changed
 /// header file ///
 class Date {
 
-    public:
-        Date(string, string, string);
-        const print(); // const needs to be defined here
-        string day;
-        string month;
-        string year;
+  public:
+    Date(string, string, string);
+    const print(); // const needs to be defined here
+
+  private:
+    string day;
+    string month;
+    string year;
 };
 
 /// source file ///
 Date::Date(string d, string, m, string y) : day(d), month(m), year(y) {
+  // this is the constructor
 }
 
 // const print function
@@ -367,10 +370,10 @@ Static data member and member functions exist to service an entire class.
 ```c++
 /// header file ///
 class Book {
-    public:
-        static int get_next_id();
-    private:
-        static int next_id;
+  public:
+    static int get_next_id();
+  private:
+    static int next_id;
 };
 
 /// source file ///
@@ -485,8 +488,8 @@ If there is diamond inheritance, virtual inheritance will ensure member variable
 ```c++
 /// base class header file ///
 class Grandparent {
-    public:
-        int x;
+  public:
+    int x;
 }
 
 /// class header file ///
@@ -582,16 +585,16 @@ An abstract class cannot be instantiated.
 ```c++
 /// base class header file ///
 class Base {
-    public:
-        virtual void func_1() = 0; // pure virtual function
-        virtual void func_2();     // virtual function
+  public:
+      virtual void func_1() = 0; // pure virtual function
+      virtual void func_2();     // virtual function
 };
 
 /// child class header file ///
 class Child : public Base {
-    public:
-        void func_1(); // pure virtual function
-        void func_2(); // virtual function (optional)
+  public:
+      void func_1(); // pure virtual function
+      void func_2(); // virtual function (optional)
 };
 ```
 
@@ -860,10 +863,10 @@ If you have a templated class
 /// header file ///
 template <class T>
 class Array {
-   template <typename V>
+  template <typename V>
 
-    public:
-      Array<T>& operator=(Array&);
+  public:
+    Array<T>& operator=(Array&);
 };
 
 /// implementation (header file) ///
