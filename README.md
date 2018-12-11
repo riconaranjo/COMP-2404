@@ -308,10 +308,35 @@ Calendar::Calendar(string n) : work_events("work"),
   - object / data member: constant keyword before data type
   - member function : constant keyword after prototype
 - constant functions
-  - cannot modify data members
+  - **cannot modify data members**
   - the only type of functions allowed on a constant object
 - constant data members must be initialized before constructor body
 - must use member initializer syntax
+
+```c++
+const Date newYear(1, 1); // date that cannot be changed
+// only const functions can be called on newYear object
+
+/// header file ///
+class Date {
+
+    public:
+        Date(string, string, string);
+        const print(); // const needs to be defined here
+        string day;
+        string month;
+        string year;
+};
+
+/// source file ///
+Date::Date(string d, string, m, string y) : day(d), month(m), year(y) {
+}
+
+// const print function
+Date::print(string n) const { // const needs to be added here
+    cout << day << month << year;
+}
+```
 
 ## Friendship
 - grants access to all `private` / `protected` members
