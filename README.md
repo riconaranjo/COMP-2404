@@ -288,12 +288,15 @@ Date d4(d1);  // explicit call to copy constructor
   - initializing data members in constructor
   - also how you call base class constructor
 - order of ctor / dtor
+  - destructors are executed in reverse order as constructor
+  - data members are always destroyed before class
+  - derived classes always destroyed before base class
 
 ```c++
 /// header file ///
 class Calendar {
-    Events work_events;   // data member
-    Events school_events; // data member
+    Events work_events;   // constructed first / destroyed second
+    Events school_events; // constructed second / destroyed first
 };
 
 /// source file ///
@@ -357,7 +360,7 @@ class Address {
 ```
 
 ## Static Class Members
-Static data member and member functions exist to service an entire class.
+Static data members and member functions exist to service an entire class.
 - 'global' to class
 - static functions exists even without class instances
   - must be written to work even if no instances exist
@@ -399,7 +402,7 @@ There are four cases when adding a new element to a linked list:
 There are four cases to consider when removing elements from a linked list:
 1. list is already empty (incorrect input)
 2. remove from the front
-  - removing last element -> newly empty list
+    - removing last element -> creates newly empty list
 3. remove from the middle
 4. remove from the end
 
@@ -438,22 +441,29 @@ class Base {
 
 /// child class header file ///
 class Child : public Base {
-    // code
+    // private   -> invisible
+    // protected -> protected
+    // public    -> public
 };
 
 /// child class header file ///
 class OtherChild : protected Base {
-    // code
+    // private   -> invisible
+    // protected -> protected
+    // public    -> protected
 };
 
 /// child class header file ///
-class OtherChild : private Base {
-    // code
+class UnWantedChild : private Base {
+    // private   -> invisible
+    // protected -> private
+    // public    -> private
 };
 ```
 
 ## Base Class Initializer syntax
 - call base constructor as with class initializer syntax
+  - basically member initializer syntax for base class
 
 ```c++
 /// base class header file ///
@@ -509,8 +519,10 @@ class Child : public virtual Parent_1, virtual public Parent_2 {
 ```
 
 ## Order of Execution
-- constructor: parent to child
-- destructor:  child to parent
+- constructor: parent to child to data members
+- destructor:  data members to child to parent
+
+`// parent class may also have data members...`
 
 # 4.3 | Design Patterns
 A design pattern is a solution to a commonly occurring problem.
@@ -530,21 +542,33 @@ A design pattern is a solution to a commonly occurring problem.
   - e.g. client-server / peer-to-peer / mvc
 
 ## Façade
-Structural design pattern that provides a simplified interface for complex classes
+`Façade` is a structural design pattern that provides a simplified interface for complex classes
 - e.g. client class interacts with Façade
   - which then delegates actual operation(s) to actual class(es)
 
 ![facade](img/facade.png)
 
 ## Observer
-
-![factory](img/factory.png)
-
-## Factory
+`Observer` is a behavioural design pattern that allows observer classes to track subject state changes.
+- subject class contains a collection of observers
+  - updates observers when there are state changes
+- observer class subscribes to notification from subject classes
+  - updates itself when notified by subject of state changes
 
 ![observer](img/observer.png)
 
+## Factory
+`Factory` is a creational design pattern that encapsulates the creation of objects.
+- creates and returns concrete objects
+- client treats created objects as base class
+  - client does not need to know concrete class type
+
+![factory](img/factory.png)
+
 ## Anti-Patterns
+
+Bad programming habit
+- e.g. putting everything into one giant class
 
 # 4.4 | Polymorphism
 - enables generalized use of a class hierarchy
@@ -570,7 +594,7 @@ Linking a function call to a specific function.
 
 ## Virtual Functions
 A virtual function is selected for execution at runtime
-- based oon the type of **object** not on type of **handle**
+- based on the type of **object** not on type of **handle**
   - e.g. **base class** function vs. **child class** function
 - Virtual destructor needs to be implemented
   - to deallocate memory using base class pointer
