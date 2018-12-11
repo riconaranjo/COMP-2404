@@ -44,7 +44,7 @@ Pipelining is used for IO redirection.
 
 ## Program Building
 
-**Compiling:** generate object code from source files<>
+**Compiling:** generate object code from source files
 - `g++ -c` to compile.
 
 **Linking:** generate executable from object code
@@ -106,7 +106,7 @@ Pipelining is used for IO redirection.
 
 # 2.1 | Classes
 
-## Binary Scope Resolution Operator ::
+## Binary Scope Resolution Operator `::`
 1. To access a global variable when there is a local variable with same name.
 2. To define a function in source file.
 3. To access a class's static variables.
@@ -144,9 +144,33 @@ Pipelining is used for IO redirection.
 - specified in function prototype
 - must be right-most in parameter list
 
-### Constructors
+```c++
+// you can call this function with:
+//   1. Book()
+//   2. Book("title")
+//   3. Book("title", "author")
+//
+// but not:
+//   1. Book("author")
+// since this will just put "author" in the title param
+Book(string="unknown title", string="unknown author");
+```
+
+## Constructors
 - explicitly called
 - three types
+
+```c++
+template <typename T>
+class Date {
+    public:
+        Date(&Date); // copy constructor
+        Date(&T);    // conversion constructor
+        Date();      // default constructor
+        ~Date();     // destructor
+};
+Date(); // prototype
+```
 
 **1. Copy Constructor:**
 - takes a reference of the same class
@@ -183,9 +207,9 @@ Date d4(d1);  // explicit call to copy constructor
   - the only way of using dynamically allocated memory
 
 - **operators:**
-  - arrow (->) / dereferencing (*) / address-of (&)
-  - dot operator (.) accesses object members
-  - arrow operator (->) dereferences object and then accesses object member
+  - arrow (`->`) / dereferencing (`*`) / address-of (`&`)
+  - dot operator (`.`) accesses object members
+  - arrow operator (`->`) dereferences object and then accesses object member
 
 ## Dynamic Memory Allocation
 - use `new` / `delete` commands
