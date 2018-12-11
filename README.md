@@ -285,7 +285,23 @@ Date d4(d1);  // explicit call to copy constructor
 
 ## Composition
 - member initializer syntax
+  - initializing data members in constructor
+  - also how you call base class constructor
 - order of ctor / dtor
+
+```c++
+/// header file ///
+class Calendar {
+    Events work_events;   // data member
+    Events school_events; // data member
+};
+
+/// source file ///
+Calendar::Calendar(string n) : work_events("work"),
+                               school_events("school") {
+    name = n;
+}
+```
 
 ## Constants
 - objects / data members / member functions
