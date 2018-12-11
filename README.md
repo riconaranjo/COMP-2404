@@ -650,7 +650,7 @@ If you seperate behaviour from data, runtime changes are much easier.
 ![behaviour](img/behaviour.png)
 
 ### Strategy Design Pattern
-A behavioural design pattern that provides a family of algorithms
+A **behavioural design pattern** that provides a **family of algorithms**.
 - defines an abstract interface for a family of algorithms
 - each algorithm is encapsulated
 - concrete implementations can be interchanged at runtime
@@ -1087,9 +1087,10 @@ Double-ended queues
 - allows random access
   - random access iterators
 
-**Insertion:** very efficient at front or end [like dlist]
+**Insertion:** very efficient at front or end [like doubly-linked list]
 - anywhere else less efficient than a list
   - but much more efficient than vector
+  - _(implemented with two arrays back-to-back?)_
 
 ```c++
 // create deque object
@@ -1335,7 +1336,7 @@ Most of these changes are outside the scope of this course.
 
 ## New Library Features
 
-**Override functions:** used if derived classes override base class functions.
+**Override functions:** used when derived classes override base class functions.
 
 **Final virtual functions:**
 - if base class function should never be overwritten
